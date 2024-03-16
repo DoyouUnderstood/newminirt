@@ -1,4 +1,4 @@
-#include "../include/math.h"
+#include "../include/mathematique.h"
 
 // fonction pour cree un point.
 t_tuple point(double x, double y, double z) {

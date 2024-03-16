@@ -1,4 +1,4 @@
-#include "../include/math.h"
+#include "../include/mathematique.h"
 
 // Fonction pour créer un vecteur
 t_tuple vector(double x, double y, double z) 

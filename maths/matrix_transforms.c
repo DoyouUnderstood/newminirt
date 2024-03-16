@@ -1,4 +1,4 @@
-#include "../include/math.h"
+#include "../include/mathematique.h"
 
 // Fonction Applique une mise à l'échelle sur un point ou un vecteur.
 t_tuple scale(t_tuple point, double sx, double sy, double sz)

@@ -1,4 +1,4 @@
-#include "../include/mlx.h"
+#include "../include/minilibx.h"
 
 //fonction evenement pour quitter avec echap
 int handle_keypress(int keysym, t_mlx *mlx)

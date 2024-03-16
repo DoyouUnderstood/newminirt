@@ -1,4 +1,4 @@
-#include "../include/mlx.h"
+#include "../include/minilibx.h"
 
 // fonction pour initialiser un windows.
 t_mlx   *mlx_init_and_create_window(int width, int height, char *title)

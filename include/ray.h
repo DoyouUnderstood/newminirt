@@ -1,7 +1,7 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include "math.h"
+#include "mathematique.h"
 
 typedef struct s_ray {
     t_tuple origin;

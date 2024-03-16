@@ -1,4 +1,4 @@
-#include "../include/math.h"
+#include "../include/mathematique.h"
 
 // Fonction pour initialiser une matrice 4x4 d'identite avec des 1 lors que i et j sont pareil. 0 sinon 
 t_matrix init_matrice_identite() {

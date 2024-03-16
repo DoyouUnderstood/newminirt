@@ -1,9 +1,11 @@
-#ifndef MATH_H
-#define MATH_H
+#ifndef MATHEMATIQUE_H
+#define MATHEMATIQUE_H
 
-// !!!! un tuple avec w = 0 est un vecteur !!!!
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+// !!!! un tuple avec w = 0 est un vecteur !!!!
 typedef struct s_tuple
 {
     double x;
