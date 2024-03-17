@@ -25,34 +25,68 @@ double calculate_discriminant(double a, double b, double c) {
     return b * b - 4 * a * c;
 }
 
-// Calcule les points d'intersection à partir du discriminant, 'a', 'b', et met à jour `xs`.
-void calculate_intersections(double discriminant, double a, double b, t_intersection *xs) {
-    double sqrt_discriminant = sqrt(discriminant);
-    double t1 = (-b - sqrt_discriminant) / (2 * a);
-    if (discriminant > 0) {
-        double t2 = (-b + sqrt_discriminant) / (2 * a);
-        xs->t[0] = fmin(t1, t2);
-        xs->t[1] = fmax(t1, t2);
-        xs->count = 2;
-    } else {
-        xs->t[0] = t1;
-        xs->t[1] = t1; // Pour une intersection tangentielle
-        xs->count = 2;  // renvoyer deux intersections pour un cas tangentielle.
+// Crée un nouvel objet t_object pour une sphère
+t_object* create_object_for_sphere(const t_sphere* sphere) {
+    t_object* obj = malloc(sizeof(t_object));
+    if (obj == NULL) {
+        error_exit("error malloc t_object sphere.c");
     }
+    obj->type = SPHERE;
+    obj->obj = (void*)sphere;
+    obj->next = NULL;
+    return obj;
 }
 
-// Fonction principale pour calculer l'intersection d'un rayon avec une sphère.
-t_intersection intersect_sphere(const t_ray *ray, const t_sphere *sphere) {
+// Fonction pour calculer l'intersection d'un rayon avec une sphère.
+t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_count) 
+{
+    t_sphere* sphere = (t_sphere*)object->obj;
+    
     double a, b, c;
     calculate_abc(ray, sphere, &a, &b, &c);
     double discriminant = calculate_discriminant(a, b, c);
     
-    t_intersection xs = { .count = 0 };
-    if (discriminant >= 0) {
-        calculate_intersections(discriminant, a, b, &xs);
+    t_intersection* intersections = NULL;
+    *out_count = 0;
+    
+    intersections = malloc(sizeof(t_intersection) * 2);
+    if (intersections == NULL) {
+        return NULL;
     }
-    return (xs);
+
+    if (discriminant >= 0) {
+        double sqrt_discriminant = sqrt(discriminant);
+        double t1 = (-b - sqrt_discriminant) / (2 * a);
+        double t2 = discriminant == 0 ? t1 : (-b + sqrt_discriminant) / (2 * a);
+
+        intersections[0].t = fmin(t1, t2);
+        intersections[1].t = fmax(t1, t2);
+        *out_count = 2;
+
+        for (int i = 0; i < *out_count; i++) {
+            intersections[i].object = object;
+        }
+    } else {
+        free(intersections);
+        intersections = NULL;
+    }
+
+    return (intersections);
 }
+
+// fonction qui appelle les fonctinos d'intersection specifique au object.
+t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count) 
+{
+    switch (object->type) 
+    {
+        case SPHERE:
+            return sphere_intersect(ray, object, out_count);
+        default:
+            *out_count = 0;
+            return NULL;
+    }
+}
+
 
 
 

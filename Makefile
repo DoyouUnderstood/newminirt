@@ -13,7 +13,7 @@ INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lXext -
 CRITERION_FLAGS = -lcriterion
 
 # Séparez les fichiers de test des fichiers sources principaux si possible
-TEST_SRCS = unit_test/test_intersection_sphere.c
+TEST_SRCS = unit_test/test_intersection_sphere.c unit_test/test_tracking_intersection.c
 # Vous pouvez ajouter ou supprimer des fichiers de test de cette variable
 
 SRC = main.c \
