@@ -58,6 +58,7 @@ bool        matrix_is_identity(t_matrix mat);
 
 // ============== POINT ===============
 
+t_tuple     point_sub(t_tuple point, t_tuple point2);
 t_tuple		point(double x, double y, double z);
 t_tuple		point_add_vector(t_tuple point, t_tuple vect);
 t_tuple		multiply_point(t_tuple a, double scalar);

@@ -25,6 +25,15 @@ t_tuple point_add_point(t_tuple point, t_tuple vect) {
     return result;
 }
 
+t_tuple point_sub(t_tuple point, t_tuple vect) {
+    t_tuple result;
+    result.x = point.x - vect.x;
+    result.y = point.y - vect.y;
+    result.z = point.z - vect.z;
+    result.w = 0.0;
+    return result;
+}
+
 //fonction de mise a l'echelle d'un point
 t_tuple multiply_point(t_tuple a, double scalar)
 {
@@ -37,6 +46,7 @@ t_tuple multiply_point(t_tuple a, double scalar)
 
     return result;
 }
+
 
 // fonction pour soustraire un vecteur d'un point.
 t_tuple subtract_vector_from_point(t_tuple point, t_tuple vect) 

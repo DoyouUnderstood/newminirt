@@ -7,7 +7,8 @@
 #include <criterion/logging.h>
 #include <criterion/criterion.h>
 #include <criterion/options.h>
-
+#include "include/ray.h"
+#include "include/shape.h"
 #include "minilibx.h"
 
 void error_exit(char *error_msg);

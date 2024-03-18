@@ -40,6 +40,7 @@ void    put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
 int     mlx_create_image(t_mlx *mlx);
 t_mlx   *mlx_init_and_create_window(int width, int height, char *title);
 void    mlx_cleanup(t_mlx *mlx);
+int close_window(t_mlx *mlx);
 
 #endif
 
