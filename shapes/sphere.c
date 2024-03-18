@@ -38,18 +38,14 @@ t_object* create_object_for_sphere(const t_sphere* sphere) {
 }
 
 // Fonction pour calculer l'intersection d'un rayon avec une sphère.
-t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_count) 
-{
+t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_count) {
     t_sphere* sphere = (t_sphere*)object->obj;
     
     double a, b, c;
     calculate_abc(ray, sphere, &a, &b, &c);
     double discriminant = calculate_discriminant(a, b, c);
     
-    t_intersection* intersections = NULL;
-    *out_count = 0;
-    
-    intersections = malloc(sizeof(t_intersection) * 2);
+    t_intersection* intersections = (t_intersection*)malloc(sizeof(t_intersection) * 2);
     if (intersections == NULL) {
         return NULL;
     }
@@ -57,35 +53,28 @@ t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_co
     if (discriminant >= 0) {
         double sqrt_discriminant = sqrt(discriminant);
         double t1 = (-b - sqrt_discriminant) / (2 * a);
-        double t2 = discriminant == 0 ? t1 : (-b + sqrt_discriminant) / (2 * a);
+        double t2 = (-b + sqrt_discriminant) / (2 * a);
 
-        intersections[0].t = fmin(t1, t2);
-        intersections[1].t = fmax(t1, t2);
-        *out_count = 2;
+        intersections[0] = create_intersection(t1, object);
 
-        for (int i = 0; i < *out_count; i++) {
-            intersections[i].object = object;
+        if (discriminant == 0) 
+        {
+            intersections[1] = create_intersection(t1, object);
+            *out_count = 2;
+        } else if (discriminant > 0) {
+            intersections[1] = create_intersection(t2, object);
+            *out_count = 2;
         }
-    } else {
+    } else 
+    {
         free(intersections);
         intersections = NULL;
+        *out_count = 0;
     }
 
-    return (intersections);
+    return intersections;
 }
 
-// fonction qui appelle les fonctinos d'intersection specifique au object.
-t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count) 
-{
-    switch (object->type) 
-    {
-        case SPHERE:
-            return sphere_intersect(ray, object, out_count);
-        default:
-            *out_count = 0;
-            return NULL;
-    }
-}
 
 
 

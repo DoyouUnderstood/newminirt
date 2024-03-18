@@ -79,3 +79,12 @@ t_tuple normalize_vector(t_tuple a)
     }
     return (result);
 }
+
+// Fonction pour comparer deux tuples avec la précision standard
+bool eq_tuple(t_tuple a, t_tuple b) 
+{
+    return fabs(a.x - b.x) < TUPLE_EPSILON &&
+           fabs(a.y - b.y) < TUPLE_EPSILON &&
+           fabs(a.z - b.z) < TUPLE_EPSILON &&
+           fabs(a.w - b.w) < TUPLE_EPSILON;
+}

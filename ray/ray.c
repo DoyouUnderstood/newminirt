@@ -20,3 +20,17 @@ t_tuple position(t_ray ray, double t)
     t_tuple displacement = multiply_point(ray.direction, t);
     return (point_add_vector(ray.origin, displacement));
 }
+
+t_ray transform_ray(t_matrix mat, t_ray ray) {
+    t_ray transformed_ray;
+    transformed_ray.origin = multiply_matrix_by_tuple(mat, ray.origin);
+    transformed_ray.direction = multiply_matrix_by_tuple(mat, ray.direction);
+
+    return transformed_ray;
+}
+
+
+// void throw_ray(t_sphere *sphere)
+// {
+
+// }

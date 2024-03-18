@@ -2,8 +2,9 @@
 #define MINILIB_H
 
 #include "main.h"
-#include "../lib/mlx_linux/mlx.h"
+// #include "../lib/mlx_linux/mlx.h"
 
+#include "../lib/mlx/mlx.h"
 #define KEY_ESC 0xff1b
 #define KEY_RIGHT 0xff53
 #define KEY_LEFT 0xff51

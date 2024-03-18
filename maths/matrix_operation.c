@@ -22,6 +22,18 @@ void draw_matrice(t_matrix matrice)
     }
 }
 
+// fonction booleen pour determiner si une matrix est une matrice d'identite.
+bool matrix_is_identity(t_matrix mat) {
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if ((i == j && mat.m[i][j] != 1.0) || (i != j && mat.m[i][j] != 0.0)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 // Fonction pour multiplier deux matrices 4x4
 t_matrix multiply_matrices(t_matrix Ma, t_matrix Mb) 
 {

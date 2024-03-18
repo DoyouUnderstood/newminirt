@@ -1,11 +1,16 @@
 #ifndef MATHEMATIQUE_H
 #define MATHEMATIQUE_H
 
+// un tuple avec w = 0 est un vecteur 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdbool.h>
 
-// !!!! un tuple avec w = 0 est un vecteur !!!!
+// Definition d' une précision standard pour la comparaison des tuples.
+#define TUPLE_EPSILON 1e-6
+
 typedef struct s_tuple
 {
     double x;
@@ -40,6 +45,7 @@ t_matrix 	calculate_cofactor_matrice(t_matrix mat);
 
 // ========== MATRIX TRANSFORM ===============
 
+void        draw_matrice(t_matrix matrice);
 t_tuple		reflectPoint(t_tuple point, char axis);
 t_tuple		scale(t_tuple point, double sx, double sy, double sz);
 t_matrix	rotation_y(double angle);
@@ -48,6 +54,7 @@ t_matrix	shearing_matrix(double xy, double xz, double yx, double yz, double zx, 
 t_matrix	rotation_z(double angle);
 t_matrix	scaling_matrix(double sx, double sy, double sz);
 t_matrix	translation_matrix(double dx, double dy, double dz);
+bool        matrix_is_identity(t_matrix mat);
 
 // ============== POINT ===============
 
@@ -65,5 +72,7 @@ t_tuple		vect_scale(t_tuple v, double scalar);
 double		dot_product(t_tuple a, t_tuple b);
 t_tuple		multiply_vec(t_tuple a, double scalar);
 t_tuple		normalize_vector(t_tuple a);
+bool        eq_tuple(t_tuple a, t_tuple b);
+
 
 #endif

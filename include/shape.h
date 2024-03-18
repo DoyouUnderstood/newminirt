@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
+#include <float.h>
 
 #include "main.h"
 #include "graphics.h"
@@ -43,7 +45,14 @@ typedef struct s_intersection
 
 t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count);
 t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_count);
-t_sphere create_sphere();
-t_object* create_object_for_sphere(const t_sphere* sphere);
+t_sphere		create_sphere();
+t_object*		create_object_for_sphere(const t_sphere* sphere);
+void 			set_transform(t_sphere *sphere, t_matrix new_transform);
+
+// ============ INTERSECT ==============
+
+t_intersection create_intersection(double t, t_object *object);
+t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count);
+t_intersection* hit(t_intersection* intersections, int count);
 
 #endif

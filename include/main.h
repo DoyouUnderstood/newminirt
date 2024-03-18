@@ -8,6 +8,8 @@
 #include <criterion/criterion.h>
 #include <criterion/options.h>
 
+#include "minilibx.h"
+
 void error_exit(char *error_msg);
 
 #endif 
