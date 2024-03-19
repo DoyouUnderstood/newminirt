@@ -11,6 +11,10 @@
 #include "mathematique.h"
 #include "ray.h"
 
+typedef struct s_tuple t_tuple;
+typedef struct s_ray t_ray;
+typedef struct s_matrix t_matrix;
+
 typedef enum e_obj_type
 {
 	SPHERE,
@@ -19,7 +23,7 @@ typedef enum e_obj_type
 	INVALID_TYPE = -1,
 }					t_obj_type;
 
- typedef struct s_object
+typedef struct s_object
 {
 	t_obj_type		type;
 	void			*obj;
@@ -38,7 +42,7 @@ typedef struct s_sphere
 typedef struct s_intersection
 {
     double t;
-    t_object *object; // Pointeur vers l'objet intersecté
+    t_object *object;
 }   t_intersection;
 
 // =========== SPHERE =============

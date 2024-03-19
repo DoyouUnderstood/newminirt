@@ -8,8 +8,6 @@ t_intersection create_intersection(double t, t_object *object) {
     return i;
 }
 
-
-
 // vérifier si la matrice de transformation de l'objet est la matrice identité avant de 
 // calculer son inverse. 
 // Cela pourrait réduire les calculs inutiles dans les cas où l'objet n'est pas transformé.

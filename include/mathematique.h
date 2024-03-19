@@ -11,6 +11,8 @@
 // Definition d' une précision standard pour la comparaison des tuples.
 #define TUPLE_EPSILON 1e-6
 
+typedef struct s_sphere t_sphere;
+
 typedef struct s_tuple
 {
     double x;
@@ -75,5 +77,8 @@ t_tuple		multiply_vec(t_tuple a, double scalar);
 t_tuple		normalize_vector(t_tuple a);
 bool        eq_tuple(t_tuple a, t_tuple b);
 
+// ============== NORMAL ===============
+
+t_tuple normal_at(const t_sphere* sphere, t_tuple world_point);
 
 #endif
