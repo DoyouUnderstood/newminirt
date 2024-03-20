@@ -39,7 +39,6 @@ Test(sphere_intersection_tests, intersection_of_a_scaled_sphere_with_a_ray) {
     t_object *obj = create_object_for_sphere(&s);
     int count;
     t_intersection* xs = intersect(&r, obj, &count);
-    printf("xs[0] : %f\n", xs[0].t);
     cr_assert_eq(count, 2, "Le nombre d'intersections devrait être 2");
     cr_assert_float_eq(xs[0].t, 3, 1e-6, "Le premier point d'intersection devrait être à t=3");
     cr_assert_float_eq(xs[1].t, 7, 1e-6, "Le second point d'intersection devrait être à t=7");
@@ -67,7 +66,6 @@ Test(sphere_intersection_tests, intersection_of_a_translated_sphere_with_a_ray) 
     obj = create_object_for_sphere(&s);
     int count = 0;
     t_intersection* xs = intersect(&r, obj, &count);
-    printf("nb of intersection : %d\n", count);
     cr_assert_eq(count, 0, "Il ne devrait y avoir aucune intersection");
     (void)xs;
 }

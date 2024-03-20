@@ -88,3 +88,16 @@ bool eq_tuple(t_tuple a, t_tuple b)
            fabs(a.z - b.z) < TUPLE_EPSILON &&
            fabs(a.w - b.w) < TUPLE_EPSILON;
 }
+
+// Fonction pour inverser un vecteur.
+t_tuple vector_negate(t_tuple v) 
+{
+    t_tuple result;
+
+    result.x = -v.x;
+    result.y = -v.y;
+    result.z = -v.z;
+    result.w = v.w;
+
+    return result;
+}

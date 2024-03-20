@@ -36,7 +36,7 @@ typedef struct s_sphere
     double diameter;
     t_color color;
     t_matrix transform;
-	// t_material material;
+	t_material material;
 } t_sphere;
 
 typedef struct s_intersection
@@ -52,6 +52,7 @@ t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_co
 t_sphere		create_sphere();
 t_object*		create_object_for_sphere(const t_sphere* sphere);
 void 			set_transform(t_sphere *sphere, t_matrix new_transform);
+void 			set_material(t_sphere *s, t_material m);
 
 // ============ INTERSECT ==============
 

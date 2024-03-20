@@ -6,7 +6,7 @@
 
 t_sphere		create_sphere();
 t_tuple		point(double x, double y, double z);
-t_tuple     normal_at(t_sphere *sphere, t_tuple point_point);
+t_tuple normal_at(const t_sphere* sphere, t_tuple world_point);
 
 Test(sphere_normal_tests, normal_on_sphere_at_point_on_x_axis) 
 {

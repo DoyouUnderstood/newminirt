@@ -33,11 +33,18 @@ int close_window(t_mlx *mlx)
     return (0);
 }
 
-void apply_transformation_to_sphere(t_sphere *sphere, t_matrix transformation) {
+void apply_transformation_to_sphere(t_sphere *sphere, t_matrix transformation) 
+{
     sphere->transform = multiply_matrices(sphere->transform, transformation);
 }
 
-void redraw_scene(t_mlx *mlx, t_matrix transformation) {
+void redraw_scene(t_mlx *mlx, t_matrix transformation) 
+{
+
+    t_light light;
+    light.pos = point(-10 , 10, -10);
+    light.intensity = (t_color){255, 255, 255};
+
     if (mlx == NULL || mlx->ptr == NULL) {
         write(1, "Invalid scene or MLX pointer.\n", 30);
         return;
@@ -57,7 +64,7 @@ void redraw_scene(t_mlx *mlx, t_matrix transformation) {
     sphere.color = (t_color){255, 0, 0};
     sphere.transform = init_matrice_identite();
     apply_transformation_to_sphere(&sphere, transformation);
-    throw_ray(mlx, &sphere);
+    throw_ray(mlx, &sphere, light);
     mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
 }
 

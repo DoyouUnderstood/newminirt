@@ -8,7 +8,7 @@ void error_exit(char *error_msg)
 
 
 void unit_test()
-{
+{   
     struct criterion_test_set *tests = criterion_initialize();
     int result = criterion_run_all_tests(tests);
     criterion_finalize(tests);
@@ -19,15 +19,20 @@ void unit_test()
 void    mlx_initialisation(void)
 {
     t_mlx *mlx = mlx_init_and_create_window(860, 600, "minirt");
+    t_sphere sphere;
+    t_light light;
     if (!mlx) 
         error_exit("erreur initialisation mlx\n");
     mlx_create_image(mlx);
-    t_sphere sphere;
+    
     sphere.center = point(0, 0, 0);
     sphere.diameter = 1.0;
-    sphere.color = (t_color){255, 0, 0};
+    sphere.color = (t_color){255, 55, 255};
     sphere.transform = init_matrice_identite();
-    throw_ray(mlx, &sphere);
+    light.pos = point(-10 , 10, -10);
+    light.intensity = (t_color){255, 255, 255};
+
+    throw_ray(mlx, &sphere, light);
     mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
     mlx_hook(mlx->win, 17, 0L, close_window, mlx);
     mlx_hook(mlx->win, 2, 1L<<0, handle_key, mlx);
@@ -36,7 +41,7 @@ void    mlx_initialisation(void)
     free(mlx);
 
 }
-#define UNIT_TEST 0
+#define UNIT_TEST 1
 int main(int argc, char *argv[]) 
 {
     (void)argc;
@@ -45,5 +50,6 @@ int main(int argc, char *argv[])
         unit_test();
     else
         mlx_initialisation();
+    
     return (0);
 }

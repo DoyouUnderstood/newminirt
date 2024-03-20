@@ -76,9 +76,10 @@ double		dot_product(t_tuple a, t_tuple b);
 t_tuple		multiply_vec(t_tuple a, double scalar);
 t_tuple		normalize_vector(t_tuple a);
 bool        eq_tuple(t_tuple a, t_tuple b);
+t_tuple     vector_negate(t_tuple v);
 
 // ============== NORMAL ===============
 
-t_tuple normal_at(const t_sphere* sphere, t_tuple world_point);
+t_tuple     normal_at(const t_sphere* sphere, t_tuple world_point);
 
 #endif

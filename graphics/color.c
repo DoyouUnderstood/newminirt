@@ -36,3 +36,23 @@ t_color color_multiply_alternativ(t_color c1, t_color c2)
     result.b = (c1.b / 255.0) * (c2.b / 255.0) * 255;
     return result;
 }
+
+t_light create_light(t_color color, t_tuple position)
+{
+    t_light light; 
+
+    light.intensity = color;
+    light.pos = position;
+    return (light);
+}
+
+// Fonction pour multiplier une couleur par un scalaire.
+t_color color_multiply_scalar(t_color c, double scalar) {
+    t_color result;
+
+    result.r = c.r * scalar;
+    result.g = c.g * scalar;
+    result.b = c.b * scalar;
+
+    return result;
+}

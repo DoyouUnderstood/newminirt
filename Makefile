@@ -14,7 +14,9 @@ MLX_FLAGS = -L$(MLX_DIR) -framework OpenGL -framework AppKit -lmlx
 CRITERION_FLAGS = -lcriterion
 INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lm
 
-TEST_SRCS = unit_test/test_intersection_sphere.c unit_test/test_tracking_intersection.c unit_test/test_hit.c unit_test/test_transorm_ray_and_sphere.c unit_test/test_normat_at.c
+TEST_SRCS = unit_test/test_intersection_sphere.c unit_test/test_tracking_intersection.c \
+		unit_test/test_hit.c unit_test/test_transorm_ray_and_sphere.c unit_test/test_normat_at.c \
+		unit_test/test_reflect.c unit_test/test_lightning.c
 
 SRCS = main.c \
       graphics/color.c \
@@ -29,7 +31,9 @@ SRCS = main.c \
       shapes/sphere.c \
 	  shapes/intersect.c \
 	  maths/sphere_operation.c \
-	  maths/normal.c
+	  maths/normal.c \
+	  graphics/reflect.c \
+	  graphics/lightning.c
 
 OBJ = $(SRCS:.c=.o)
 

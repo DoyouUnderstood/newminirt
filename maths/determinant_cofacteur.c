@@ -13,6 +13,7 @@ double determinant4x4(t_matrix mat)
     }
     return det;
 }
+
 // calcul le determinant d'une Matrice 3x3
 double determinant3x3(double matrix[3][3]) 
 {

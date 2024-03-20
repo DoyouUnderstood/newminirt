@@ -8,6 +8,9 @@ t_sphere create_sphere()
     sphere.diameter = 1.0;
     sphere.color = (t_color){.r = 255, .g = 255, .b = 255};
     sphere.transform = init_matrice_identite();
+    t_material material;
+    default_material(&material);
+    sphere.material = material;
 
     return (sphere);
 }
@@ -36,6 +39,7 @@ t_object* create_object_for_sphere(const t_sphere* sphere) {
     obj->next = NULL;
     return obj;
 }
+
 
 // Fonction pour calculer l'intersection d'un rayon avec une sphère.
 t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_count) {
@@ -72,11 +76,11 @@ t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_co
         *out_count = 0;
     }
 
-    return intersections;
+    return (intersections);
 }
 
-
-
-
-
-
+// Fonction pour assigner un materiaux a une sphere
+void set_material(t_sphere *s, t_material m) 
+{
+    s->material = m;
+}

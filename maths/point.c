@@ -25,6 +25,7 @@ t_tuple point_add_point(t_tuple point, t_tuple vect) {
     return result;
 }
 
+// fonction pour soustraire des points
 t_tuple point_sub(t_tuple point, t_tuple vect) {
     t_tuple result;
     result.x = point.x - vect.x;
