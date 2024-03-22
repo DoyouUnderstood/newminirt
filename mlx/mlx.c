@@ -5,9 +5,7 @@ t_mlx   *mlx_init_and_create_window(int width, int height, char *title)
 {
     t_mlx   *mlx;
 
-    mlx = (t_mlx *)malloc(sizeof(t_mlx));
-    if (!mlx)
-        error_exit("erreur malloc mlx\nmlx.c l10\n");
+    mlx = (t_mlx *)allocate_and_report(sizeof(t_mlx), "allocation t_mlx");
     mlx->ptr = mlx_init();
     if (!mlx->ptr)
     {

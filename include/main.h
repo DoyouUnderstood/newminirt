@@ -11,6 +11,8 @@
 #include "shape.h"
 #include "mathematique.h"
 #include "minilibx.h"
+#include "memory.h"
+
 
 void error_exit(char *error_msg);
 

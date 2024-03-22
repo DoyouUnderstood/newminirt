@@ -42,7 +42,9 @@ void    mlx_initialisation(void)
     free(mlx);
 
 }
+
 #define UNIT_TEST 0
+
 int main(int argc, char *argv[]) 
 {
     (void)argc;

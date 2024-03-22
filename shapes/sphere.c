@@ -30,9 +30,9 @@ double calculate_discriminant(double a, double b, double c) {
 
 // Crée un nouvel objet t_object pour une sphère
 t_object* object_create_for_sphere(const t_sphere* sphere) {
-    t_object* obj = malloc(sizeof(t_object));
+    t_object* obj = allocate_and_report(sizeof(t_object), "object allocation, function object_create_for_sphere");
     if (obj == NULL) {
-        error_exit("error malloc t_object sphere.c");
+        error_exit("error allocate_and_report t_object sphere.c");
     }
     obj->type = SPHERE;
     obj->obj = (void*)sphere;
@@ -44,12 +44,11 @@ t_object* object_create_for_sphere(const t_sphere* sphere) {
 // Fonction pour calculer l'intersection d'un rayon avec une sphère.
 t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_count) {
     t_sphere* sphere = (t_sphere*)object->obj;
-    
     double a, b, c;
     calculate_abc(ray, sphere, &a, &b, &c);
     double discriminant = calculate_discriminant(a, b, c);
     
-    t_intersection* intersections = (t_intersection*)malloc(sizeof(t_intersection) * 2);
+    t_intersection* intersections = (t_intersection*)allocate_and_report(sizeof(t_intersection) * 2, "t_intersection, sphere_intersect");
     if (intersections == NULL)
         return NULL;
 
@@ -75,7 +74,6 @@ t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_co
         intersections = NULL;
         *out_count = 0;
     }
-
     return (intersections);
 }
 
