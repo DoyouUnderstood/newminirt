@@ -50,11 +50,11 @@ t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_co
     double discriminant = calculate_discriminant(a, b, c);
     
     t_intersection* intersections = (t_intersection*)malloc(sizeof(t_intersection) * 2);
-    if (intersections == NULL) {
+    if (intersections == NULL)
         return NULL;
-    }
 
-    if (discriminant >= 0) {
+    if (discriminant >= 0) 
+    {
         double sqrt_discriminant = sqrt(discriminant);
         double t1 = (-b - sqrt_discriminant) / (2 * a);
         double t2 = (-b + sqrt_discriminant) / (2 * a);
