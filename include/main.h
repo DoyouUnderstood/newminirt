@@ -7,8 +7,8 @@
 #include <criterion/logging.h>
 #include <criterion/criterion.h>
 #include <criterion/options.h>
-#include "include/ray.h"
-#include "include/shape.h"
+#include "ray.h"
+#include "shape.h"
 #include "mathematique.h"
 #include "minilibx.h"
 

@@ -1,4 +1,5 @@
 #include "../include/ray.h"
+#include <stdint.h>
 
 // Fonction pour initialiser un rayon
 t_ray create_ray(t_tuple origin, t_tuple direction) {
@@ -32,17 +33,14 @@ t_ray transform_ray(t_matrix mat, t_ray ray) {
 
 // Convertit une couleur du format flottant (dans l'intervalle [0,1] pour chaque composante) vers un format RGB entier sur 3 octets.
 uint32_t color_to_rgb(float red, float green, float blue) {
-    // Assurez-vous que les valeurs sont dans l'intervalle [0,1]
     red = fmax(0, fmin(red, 1));
     green = fmax(0, fmin(green, 1));
     blue = fmax(0, fmin(blue, 1));
 
-    // Convertissez les valeurs flottantes en valeurs entières dans l'intervalle [0,255]
     uint8_t r = (uint8_t)(red * 255);
     uint8_t g = (uint8_t)(green * 255);
     uint8_t b = (uint8_t)(blue * 255);
 
-    // Combine les composantes en une seule valeur RGB
     return ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
 }
 
@@ -50,7 +48,7 @@ void throw_ray(t_mlx *mlx, t_sphere *sphere, t_light light)
 {
     // (void)light;
     t_tuple camera_position = point(0, 0, -5);
-    double projection_plane_z = 7.0;
+    double projection_plane_z = 4.0;
     t_ray ray;
     ray.origin = camera_position;
 
@@ -78,22 +76,13 @@ void throw_ray(t_mlx *mlx, t_sphere *sphere, t_light light)
                 t_sphere* hit_sphere = (t_sphere*)closest_hit->object->obj; // La sphère touchée
                 t_tuple hit_point = position(ray, closest_hit->t); // Point d'impact
                 t_tuple normal = normal_at(hit_sphere, hit_point); // Normal au point d'impact
-                t_tuple eye = vector_negate(ray.direction); // Vecteur oeil
-                light.intensity.r = 1.0;
-                light.intensity.g = 1.0;
-                light.intensity.b = 1.0;
-
-                printf("Light Pos: (%f, %f, %f), Intensity: (%f, %f, %f)\n", light.pos.x, light.pos.y, light.pos.z, light.intensity.r, light.intensity.g, light.intensity.b);
-                printf("Hit Point: (%f, %f, %f)\n", hit_point.x, hit_point.y, hit_point.z);
-                printf("Normal: (%f, %f, %f)\n", normal.x, normal.y, normal.z);
-                printf("Eye: (%f, %f, %f)\n", eye.x, eye.y, eye.z);
+                t_tuple eye = vector_negate(ray.direction); 
 
                 t_color color = lighting(hit_sphere->material, light, hit_point, eye, normal);
-                // printf("%f\n %f\n %f\n", color.r, color.g, color.b);
                 uint32_t rgb_color = color_to_rgb(color.r, color.g, color.b);
                 put_pixel_to_img(mlx, x, y, rgb_color);
             } else {
-                put_pixel_to_img(mlx, x, y, 0x077770);
+                put_pixel_to_img(mlx, x, y, 0x000000);
             }
 
             if (intersections != NULL) {

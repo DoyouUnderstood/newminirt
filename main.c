@@ -29,7 +29,8 @@ void    mlx_initialisation(void)
     sphere.diameter = 1.0;
     sphere.color = (t_color){255, 55, 255};
     sphere.transform = init_matrice_identite();
-    light.pos = point(-10 , 10, -10);
+    sphere.material = default_material();
+    light.pos = point(-15 , 10, -5);
     light.intensity = (t_color){255, 255, 255};
 
     throw_ray(mlx, &sphere, light);
@@ -41,7 +42,7 @@ void    mlx_initialisation(void)
     free(mlx);
 
 }
-#define UNIT_TEST 1
+#define UNIT_TEST 0
 int main(int argc, char *argv[]) 
 {
     (void)argc;
