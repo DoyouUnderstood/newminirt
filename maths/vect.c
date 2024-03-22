@@ -1,7 +1,7 @@
 #include "../include/mathematique.h"
 
 // Fonction pour créer un vecteur
-t_tuple vector(double x, double y, double z) 
+t_tuple vector_create(double x, double y, double z) 
 {
     return (t_tuple){x, y, z, 0.0};
 }

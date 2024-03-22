@@ -37,7 +37,7 @@ t_color color_multiply_alternativ(t_color c1, t_color c2)
     return result;
 }
 
-t_light create_light(t_color color, t_tuple position)
+t_light light_create(t_color color, t_tuple position)
 {
     t_light light; 
 

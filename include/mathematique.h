@@ -68,7 +68,7 @@ t_tuple		subtract_vector_from_point(t_tuple point, t_tuple vect);
 
 // ============== VECTEUR ===============
 
-t_tuple		vector(double x, double y, double z);
+t_tuple		vector_create(double x, double y, double z);
 t_tuple		add_two_vectors(t_tuple v1, t_tuple v2);
 t_tuple		subtract_vectors(t_tuple a, t_tuple b); 
 t_tuple		vect_scale(t_tuple v, double scalar);
@@ -81,5 +81,7 @@ t_tuple     vector_negate(t_tuple v);
 // ============== NORMAL ===============
 
 t_tuple     normal_at(const t_sphere* sphere, t_tuple world_point);
+
+t_tuple reflect(t_tuple incident, t_tuple normal);
 
 #endif

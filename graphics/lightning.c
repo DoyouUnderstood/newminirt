@@ -1,5 +1,6 @@
 #include "../include/graphics.h"
 
+// fonction qui calcule la couleurs d'un pixel.
 t_color lighting(t_material material, t_light light, t_tuple position, t_tuple eyev, t_tuple normalv) 
 {
     t_color effective_color = color_multiply(material.color, light.intensity);

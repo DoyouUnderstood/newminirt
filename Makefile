@@ -33,8 +33,9 @@ SRCS = main.c \
 	  shapes/intersect.c \
 	  maths/sphere_operation.c \
 	  maths/normal.c \
-	  graphics/reflect.c \
-	  graphics/lightning.c
+	  graphics/material.c \
+	  graphics/lightning.c \
+	  maths/utils.c
 
 
 OBJ = $(SRCS:.c=.o)

@@ -31,8 +31,7 @@ t_color color_multiply(t_color c1, t_color c2);
 t_color color_multiply_alternativ(t_color c1, t_color c2);
 t_color color_multiply_scalar(t_color c, double scalar);
 
-t_tuple reflect(t_tuple incident, t_tuple normal);
-t_light create_light(t_color color, t_tuple position);
+t_light light_create(t_color color, t_tuple position);
 
 t_material default_material();
 
