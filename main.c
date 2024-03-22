@@ -25,18 +25,18 @@ void    mlx_initialisation(void)
         error_exit("erreur initialisation mlx\n");
     mlx_create_image(mlx);
     
-    sphere.center = point(0, 0, 0);
+    sphere.center = point_create(0, 0, 0);
     sphere.diameter = 1.0;
     sphere.color = (t_color){255, 55, 255};
-    sphere.transform = init_matrice_identite();
-    sphere.material = default_material();
-    light.pos = point(-15 , 10, -5);
+    sphere.transform = matrix_init_identity();
+    sphere.material = material_create_default();
+    light.pos = point_create(-15 , 10, -5);
     light.intensity = (t_color){255, 255, 255};
 
-    throw_ray(mlx, &sphere, light);
+    ray_throw(mlx, &sphere, light);
     mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
-    mlx_hook(mlx->win, 17, 0L, close_window, mlx);
-    mlx_hook(mlx->win, 2, 1L<<0, handle_key, mlx);
+    mlx_hook(mlx->win, 17, 0L, mlx_event_close_win, mlx);
+    mlx_hook(mlx->win, 2, 1L<<0, mlx_event_handle_key, mlx);
     mlx_loop(mlx->ptr);
     mlx_destroy_window(mlx->ptr, mlx->win);
     free(mlx);

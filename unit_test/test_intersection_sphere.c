@@ -3,7 +3,7 @@
 
 Test(sphere_intersections, ray_intersects_sphere_at_two_points) {
     t_ray ray = {point(0, 0, -5), vector(0, 0, 1)};
-    t_sphere sphere = create_sphere();
+    t_sphere sphere = sphere_create();
     
     t_object obj;
     obj.type = SPHERE;
@@ -21,7 +21,7 @@ Test(sphere_intersections, ray_intersects_sphere_at_two_points) {
 
 Test(sphere_intersections, ray_intersects_sphere_selon_une_tangente) {
     t_ray ray = {point(0, 1, -5), vector(0, 0, 1)};
-    t_sphere sphere = create_sphere();
+    t_sphere sphere = sphere_create();
     t_object obj;
     obj.type = SPHERE;
     obj.obj = &sphere;
@@ -39,7 +39,7 @@ Test(sphere_intersections, ray_intersects_sphere_selon_une_tangente) {
 
 Test(sphere_intersections, ray_intersects_sphere_at_nothin_he_miss) {
     t_ray ray = {point(0, 2, -5), vector(0, 0, 1)};
-    t_sphere sphere = create_sphere();
+    t_sphere sphere = sphere_create();
     t_object obj;
     obj.type = SPHERE;
     obj.obj = &sphere;
@@ -54,7 +54,7 @@ Test(sphere_intersections, ray_intersects_sphere_at_nothin_he_miss) {
 
 Test(sphere_intersections, ray_rayon_prend_naissance_à_l_intérieur_d_une_sphère) {
     t_ray ray = {point(0, 0, 0), vector(0, 0, 1)};
-    t_sphere sphere = create_sphere();
+    t_sphere sphere = sphere_create();
     t_object obj;
     obj.type = SPHERE;
     obj.obj = &sphere;
@@ -70,7 +70,7 @@ Test(sphere_intersections, ray_rayon_prend_naissance_à_l_intérieur_d_une_sphè
 
 Test(sphere_intersections, sphere_est_derriere_un_rayon) {
     t_ray ray = {point(0, 0, 5), vector(0, 0, 1)};
-    t_sphere sphere = create_sphere();
+    t_sphere sphere = sphere_create();
     t_object obj;
     obj.type = SPHERE;
     obj.obj = &sphere;

@@ -15,7 +15,7 @@
 
 
 //fonction evenement pour quitter avec echap
-int handle_keypress(int keysym, t_mlx *mlx)
+int mlx_event_handle_keypress(int keysym, t_mlx *mlx)
 {
     if (keysym == KEY_ESC)
     {
@@ -26,7 +26,7 @@ int handle_keypress(int keysym, t_mlx *mlx)
 }
 
 // fonction pour quitter avec la croix rouge
-int close_window(t_mlx *mlx)
+int mlx_event_close_win(t_mlx *mlx)
 {
     exit(0);
     mlx_cleanup(mlx);
@@ -35,14 +35,14 @@ int close_window(t_mlx *mlx)
 
 void apply_transformation_to_sphere(t_sphere *sphere, t_matrix transformation) 
 {
-    sphere->transform = multiply_matrices(sphere->transform, transformation);
+    sphere->transform = matrix_multiply(sphere->transform, transformation);
 }
 
 void redraw_scene(t_mlx *mlx, t_matrix transformation) 
 {
 
     t_light light;
-    light.pos = point(-10 , 10, -10);
+    light.pos = point_create(-10 , 10, -10);
     light.intensity = (t_color){255, 255, 255};
 
     if (mlx == NULL || mlx->ptr == NULL) {
@@ -59,31 +59,31 @@ void redraw_scene(t_mlx *mlx, t_matrix transformation)
     }
     mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian);
     t_sphere sphere;
-    sphere.center = point(0, 0, 0);
+    sphere.center = point_create(0, 0, 0);
     sphere.diameter = 1.0;
     sphere.color = (t_color){255, 0, 0};
-    sphere.transform = init_matrice_identite();
+    sphere.transform = matrix_init_identity();
     apply_transformation_to_sphere(&sphere, transformation);
-    throw_ray(mlx, &sphere, light);
+    ray_throw(mlx, &sphere, light);
     mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
 }
 
-int handle_key(int keycode, void *param) 
+int mlx_event_handle_key(int keycode, void *param) 
 {
     t_mlx *mlx = (t_mlx*)param;
-    t_matrix transformation = init_matrice_identite();
+    t_matrix transformation = matrix_init_identity();
     if (keycode == KEY_A) {
-        transformation = scaling_matrix(1, 0.5, 1); // Rétrécir le long de l'axe Y
+        transformation = matrix_scaling(1, 0.5, 1); // Rétrécir le long de l'axe Y
     } else if (keycode == KEY_S) {
-        transformation = scaling_matrix(0.5, 1, 1); // Rétrécir le long de l'axe X
+        transformation = matrix_scaling(0.5, 1, 1); // Rétrécir le long de l'axe X
     } else if (keycode == KEY_SHRINK_ROTATE) {
-        t_matrix rotation = rotation_z(M_PI / 4);
-        t_matrix scaling = scaling_matrix(0.5, 1, 1); // Réduire et faire pivoter
-        transformation = multiply_matrices(rotation, scaling);
+        t_matrix rotation = matrix_rotation_z(M_PI / 4);
+        t_matrix scaling = matrix_scaling(0.5, 1, 1); // Réduire et faire pivoter
+        transformation = matrix_multiply(rotation, scaling);
     } else if (keycode == KEY_SHRINK_SHEAR) {
-        t_matrix shearing = shearing_matrix(1, 0, 0, 0, 0, 0);
-        t_matrix scaling = scaling_matrix(0.5, 1, 1); // Rétrécir et incliner
-        transformation = multiply_matrices(shearing, scaling);
+        t_matrix shearing = matrix_shearing(1, 0, 0, 0, 0, 0);
+        t_matrix scaling = matrix_scaling(0.5, 1, 1); // Rétrécir et incliner
+        transformation = matrix_multiply(shearing, scaling);
     }
     redraw_scene(mlx, transformation);
     return (0);

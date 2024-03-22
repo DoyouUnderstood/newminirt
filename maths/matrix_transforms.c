@@ -1,16 +1,7 @@
 #include "../include/mathematique.h"
 
-// Fonction Applique une mise à l'échelle sur un point ou un vecteur.
-t_tuple scale(t_tuple point, double sx, double sy, double sz)
-{
-    point.x *= sx;
-    point.y *= sy;
-    point.z *= sz;
-    return point;
-}
-
 // Fonction qui réfléchit un point ou un vecteur par rapport à un axe spécifié.
-t_tuple reflectPoint(t_tuple point, char axis) {
+t_tuple tuple_reflect(t_tuple point, char axis) {
     switch (axis) {
         case 'x':
             point.x = -point.x;
@@ -28,9 +19,9 @@ t_tuple reflectPoint(t_tuple point, char axis) {
 }
 
 // fonction qui crée une matrice de mise à l'échelle.
-t_matrix scaling_matrix(double sx, double sy, double sz) 
+t_matrix matrix_scaling(double sx, double sy, double sz) 
 {
-    t_matrix matrix = init_matrice_identite();
+    t_matrix matrix = matrix_init_identity();
     matrix.m[0][0] = sx;
     matrix.m[1][1] = sy;
     matrix.m[2][2] = sz;
@@ -38,9 +29,9 @@ t_matrix scaling_matrix(double sx, double sy, double sz)
 }
 
 // fonction qui crée une matrice de rotation autour de l'axe z.
-t_matrix rotation_z(double angle) 
+t_matrix matrix_rotation_z(double angle) 
 {
-    t_matrix matrix = init_matrice_identite();
+    t_matrix matrix = matrix_init_identity();
     double cosTheta = cos(angle);
     double sinTheta = sin(angle);
 
@@ -53,8 +44,8 @@ t_matrix rotation_z(double angle)
 }
 
 // fonction qui crée une matrice de cisaillement.
-t_matrix shearing_matrix(double xy, double xz, double yx, double yz, double zx, double zy) {
-    t_matrix matrix = init_matrice_identite();
+t_matrix matrix_shearing(double xy, double xz, double yx, double yz, double zx, double zy) {
+    t_matrix matrix = matrix_init_identity();
 
     matrix.m[0][1] = xy;
     matrix.m[0][2] = xz;
@@ -67,8 +58,8 @@ t_matrix shearing_matrix(double xy, double xz, double yx, double yz, double zx, 
 }
 
 // fonction qui crée une matrice de rotation autour de l'axe y.
-t_matrix rotation_y(double angle) {
-    t_matrix matrix = init_matrice_identite();
+t_matrix matrix_rotation_y(double angle) {
+    t_matrix matrix = matrix_init_identity();
     double cosTheta = cos(angle);
     double sinTheta = sin(angle);
 
@@ -81,8 +72,8 @@ t_matrix rotation_y(double angle) {
 }
 
 // fonction qui crée une matrice de rotation autour de l'axe x.
-t_matrix rotation_x(double angle) {
-    t_matrix matrix = init_matrice_identite();
+t_matrix matrix_rotation_x(double angle) {
+    t_matrix matrix = matrix_init_identity();
     double cosTheta = cos(angle);
     double sinTheta = sin(angle);
 
@@ -95,7 +86,7 @@ t_matrix rotation_x(double angle) {
 }
 
 // Fonction pour créer une matrice de translation
-t_matrix translation_matrix(double dx, double dy, double dz) {
+t_matrix matrix_translation(double dx, double dy, double dz) {
     t_matrix mat = {{{1, 0, 0, dx},
                        {0, 1, 0, dy},
                        {0, 0, 1, dz},

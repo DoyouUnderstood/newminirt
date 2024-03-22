@@ -7,7 +7,7 @@ t_tuple vector_create(double x, double y, double z)
 }
 
 //fonction pour ajouter 2 vecteurs
-t_tuple add_two_vectors(t_tuple v1, t_tuple v2)
+t_tuple vector_add(t_tuple v1, t_tuple v2)
  {
     t_tuple result;
     result.x = v1.x + v2.x;
@@ -17,19 +17,8 @@ t_tuple add_two_vectors(t_tuple v1, t_tuple v2)
     return result;
 }
 
-// fonction pour soustraire les vecteurs.
-t_tuple subtract_vectors(t_tuple a, t_tuple b) 
-{
-    t_tuple result;
-    result.x = a.x - b.x;
-    result.y = a.y - b.y;
-    result.z = a.z - b.z;
-    result.w = a.w;
-    return result;
-}
-
 //fonction de mise a l'echelle d'un vecteur.
-t_tuple vect_scale(t_tuple v, double scalar)
+t_tuple vector_scale(t_tuple v, double scalar)
 {
     t_tuple result;
 
@@ -42,12 +31,12 @@ t_tuple vect_scale(t_tuple v, double scalar)
 }
 
 // fonction de produit scalaire de vecteur. 
-double dot_product(t_tuple a, t_tuple b) {
+double vector_dot(t_tuple a, t_tuple b) {
     return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
 //fonction pour multiplier toute les composantes d'un vec pour un scalaire
-t_tuple multiply_vec(t_tuple a, double scalar)
+t_tuple vector_multiply(t_tuple a, double scalar)
 {
     t_tuple result;
 
@@ -60,7 +49,7 @@ t_tuple multiply_vec(t_tuple a, double scalar)
 }
 
 //fonction pour normaliser un vecteur 
-t_tuple normalize_vector(t_tuple a) 
+t_tuple vector_normalize(t_tuple a) 
 {
     t_tuple result;
     double length;
@@ -74,19 +63,9 @@ t_tuple normalize_vector(t_tuple a)
         result.w = 0;
     } else 
     {
-        // Si le vecteur est de longueur nulle, retourne un vecteur nul.
         result.x = result.y = result.z = result.w = 0;
     }
     return (result);
-}
-
-// Fonction pour comparer deux tuples avec la précision standard
-bool eq_tuple(t_tuple a, t_tuple b) 
-{
-    return fabs(a.x - b.x) < TUPLE_EPSILON &&
-           fabs(a.y - b.y) < TUPLE_EPSILON &&
-           fabs(a.z - b.z) < TUPLE_EPSILON &&
-           fabs(a.w - b.w) < TUPLE_EPSILON;
 }
 
 // Fonction pour inverser un vecteur.

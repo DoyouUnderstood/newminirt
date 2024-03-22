@@ -6,9 +6,9 @@ t_tuple reflect(t_tuple incident, t_tuple normal)
     double dot;
     t_tuple scaled_normal;
     t_tuple reflection;
-    dot = dot_product(incident, normal);
-    scaled_normal = vect_scale(normal, 2 * dot);
-    reflection = subtract_vectors(incident, scaled_normal);
+    dot = vector_dot(incident, normal);
+    scaled_normal = vector_scale(normal, 2 * dot);
+    reflection = tuple_subtract(incident, scaled_normal);
 
     return (reflection);
 }

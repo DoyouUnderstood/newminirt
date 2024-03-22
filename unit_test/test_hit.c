@@ -4,8 +4,8 @@
 // Test pour "Le hit, lorsque toutes les intersections ont un t positif"
 Test(hit_tests, all_positive_t) {
     t_sphere* s = malloc(sizeof(t_sphere));
-    *s = create_sphere();
-    t_object* obj = create_object_for_sphere(s);
+    *s = sphere_create();
+    t_object* obj = object_create_for_sphere(s);
     t_intersection i1 = create_intersection(1, obj);
     t_intersection i2 = create_intersection(2, obj);
     t_intersection xs[] = {i1, i2};
@@ -21,8 +21,8 @@ Test(hit_tests, all_positive_t) {
 
 Test(hit_tests, some_negative_t) {
     t_sphere* s = malloc(sizeof(t_sphere));
-    *s = create_sphere();
-    t_object* obj = create_object_for_sphere(s);
+    *s = sphere_create();
+    t_object* obj = object_create_for_sphere(s);
     t_intersection i1 = create_intersection(-1, obj); 
     t_intersection i2 = create_intersection(1, obj);
     t_intersection xs[] = {i1, i2};
@@ -35,8 +35,8 @@ Test(hit_tests, some_negative_t) {
 // Test pour "Le hit est toujours l'intersection positive la plus basse"
 Test(hit_tests, lowest_nonnegative_intersection) {
     t_sphere* s = malloc(sizeof(t_sphere));
-    *s = create_sphere();
-    t_object* obj = create_object_for_sphere(s);
+    *s = sphere_create();
+    t_object* obj = object_create_for_sphere(s);
     t_intersection i1 = create_intersection(5, obj);
     t_intersection i2 = create_intersection(7, obj);
     t_intersection i3 = create_intersection(-3, obj);
@@ -49,8 +49,8 @@ Test(hit_tests, lowest_nonnegative_intersection) {
 
 Test(hit_tests, no_positive_intersection) {
     t_sphere* s = malloc(sizeof(t_sphere));
-    *s = create_sphere();
-    t_object* obj = create_object_for_sphere(s);
+    *s = sphere_create();
+    t_object* obj = object_create_for_sphere(s);
     t_intersection i1 = create_intersection(-2, obj);
     t_intersection i2 = create_intersection(-1, obj);
     t_intersection xs[] = {i1, i2};

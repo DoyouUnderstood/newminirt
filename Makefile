@@ -35,7 +35,8 @@ SRCS = main.c \
 	  maths/normal.c \
 	  graphics/material.c \
 	  graphics/lightning.c \
-	  maths/utils.c
+	  maths/utils.c \
+	  maths/tuple.c
 
 
 OBJ = $(SRCS:.c=.o)

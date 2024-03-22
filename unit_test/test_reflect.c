@@ -12,7 +12,7 @@ Test(reflection_tests, vector_approaching_at_45_degrees)
     
     t_tuple r = reflect(v, n);
     
-    cr_assert(eq_tuple(r, expected), "Reflection of v=(1,-1,0) off n=(0,1,0) should be (1,1,0)");
+    cr_assert(tuple_eq(r, expected), "Reflection of v=(1,-1,0) off n=(0,1,0) should be (1,1,0)");
 }
 
 Test(reflection_tests, vector_off_slanted_surface) 
@@ -23,5 +23,5 @@ Test(reflection_tests, vector_off_slanted_surface)
     
     t_tuple r = reflect(v, n);
     
-    cr_assert(eq_tuple(r, expected), "Reflection of v=(0,-1,0) off n=(√2/2, √2/2, 0) should be (1,0,0)");
+    cr_assert(tuple_eq(r, expected), "Reflection of v=(0,-1,0) off n=(√2/2, √2/2, 0) should be (1,0,0)");
 }

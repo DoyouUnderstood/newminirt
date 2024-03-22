@@ -1,15 +1,15 @@
 #include "../include/shape.h"
 
 // fonction qui cree une sphere.
-t_sphere create_sphere() 
+t_sphere sphere_create() 
 {
     t_sphere sphere;
-    sphere.center = point(0, 0, 0);
+    sphere.center = point_create(0, 0, 0);
     sphere.diameter = 1.0;
     sphere.color = (t_color){.r = 255, .g = 255, .b = 255};
-    sphere.transform = init_matrice_identite();
+    sphere.transform = matrix_init_identity();
     t_material material;
-    default_material(&material);
+    material_create_default(&material);
     sphere.material = material;
 
     return (sphere);
@@ -17,10 +17,10 @@ t_sphere create_sphere()
 
 // Calcule les coefficients 'a', 'b', et 'c' pour l'équation quadratique d'intersection.
 void calculate_abc(const t_ray *ray, const t_sphere *sphere, double *a, double *b, double *c) {
-    t_tuple sphere_to_ray = subtract_vectors(ray->origin, sphere->center);
-    *a = dot_product(ray->direction, ray->direction);
-    *b = 2 * dot_product(ray->direction, sphere_to_ray);
-    *c = dot_product(sphere_to_ray, sphere_to_ray) - pow(sphere->diameter, 2);
+    t_tuple sphere_to_ray = tuple_subtract(ray->origin, sphere->center);
+    *a = vector_dot(ray->direction, ray->direction);
+    *b = 2 * vector_dot(ray->direction, sphere_to_ray);
+    *c = vector_dot(sphere_to_ray, sphere_to_ray) - pow(sphere->diameter, 2);
 }
 
 // Calcule le discriminant à partir des coefficients 'a', 'b', et 'c'.
@@ -29,7 +29,7 @@ double calculate_discriminant(double a, double b, double c) {
 }
 
 // Crée un nouvel objet t_object pour une sphère
-t_object* create_object_for_sphere(const t_sphere* sphere) {
+t_object* object_create_for_sphere(const t_sphere* sphere) {
     t_object* obj = malloc(sizeof(t_object));
     if (obj == NULL) {
         error_exit("error malloc t_object sphere.c");

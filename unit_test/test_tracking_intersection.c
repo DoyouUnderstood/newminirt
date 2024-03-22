@@ -5,7 +5,7 @@ Test(intersection_tests, intersect_sets_object_on_the_intersection)
 {
     t_ray ray = {point(0, 0, -5), vector(0, 0, 1)};
     t_object sphere_object;
-    t_sphere sphere = create_sphere();
+    t_sphere sphere = sphere_create();
     sphere_object.type = SPHERE;
     sphere_object.obj = &sphere;
 
@@ -20,7 +20,7 @@ Test(intersection_tests, intersect_sets_object_on_the_intersection)
 }
 
 Test(intersection_tests, encapsulates_t_and_object) {
-    t_sphere s = create_sphere();
+    t_sphere s = sphere_create();
     t_object sphere_object;
     sphere_object.type = SPHERE;
     sphere_object.obj = &s;

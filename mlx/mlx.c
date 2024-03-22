@@ -38,7 +38,7 @@ int mlx_create_image(t_mlx *mlx)
 }
 
 // fonction pour ajouter un pixel dans l'image
-void put_pixel_to_img(t_mlx *mlx, int x, int y, int color) 
+void mlx_put_pixel_to_img(t_mlx *mlx, int x, int y, int color) 
 {
     if (!mlx || !mlx->addr)
         error_exit("erreur put pixel to img mlx.c\n");

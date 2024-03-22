@@ -6,13 +6,13 @@ t_color lighting(t_material material, t_light light, t_tuple position, t_tuple e
     t_color effective_color = color_multiply(material.color, light.intensity);
 
     // Trouver la direction de la lumière
-    t_tuple lightv = normalize_vector(subtract_vectors(light.pos, position));
+    t_tuple lightv = vector_normalize(tuple_subtract(light.pos, position));
 
     // Calculer l'ambiant
     t_color ambient = color_multiply_scalar(effective_color, material.ambient);
 
     // light_dot_normal représente le cosinus de l'angle entre le vecteur lumière et le vecteur normal.
-    double light_dot_normal = dot_product(lightv, normalv);
+    double light_dot_normal = vector_dot(lightv, normalv);
     t_color diffuse;
     t_color specular;
 
@@ -26,7 +26,7 @@ t_color lighting(t_material material, t_light light, t_tuple position, t_tuple e
 
         // Refléter le vecteur lumière autour du vecteur normal
         t_tuple reflectv = reflect(vector_negate(lightv), normalv);
-        double reflect_dot_eye = dot_product(reflectv, eyev);
+        double reflect_dot_eye = vector_dot(reflectv, eyev);
 
         if (reflect_dot_eye <= 0) {
             specular = (t_color){.r = 0, .g = 0, .b = 0};

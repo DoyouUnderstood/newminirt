@@ -49,8 +49,11 @@ typedef struct s_intersection
 
 t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count);
 t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_count);
-t_sphere		create_sphere();
-t_object*		create_object_for_sphere(const t_sphere* sphere);
+t_sphere		sphere_create();
+t_object*		object_create_for_sphere(const t_sphere* sphere);
+
+// ========== TRANSFORMATION ===========
+
 void 			set_transform(t_sphere *sphere, t_matrix new_transform);
 void 			set_material(t_sphere *s, t_material m);
 

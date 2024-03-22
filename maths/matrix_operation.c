@@ -1,7 +1,7 @@
 #include "../include/mathematique.h"
 
 // Fonction pour initialiser une matrice 4x4 d'identite avec des 1 lors que i et j sont pareil. 0 sinon 
-t_matrix init_matrice_identite() {
+t_matrix matrix_init_identity() {
     t_matrix matrice;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -12,7 +12,7 @@ t_matrix init_matrice_identite() {
 }
 
 // Fonction d'affichage de matrice
-void draw_matrice(t_matrix matrice) 
+void matrix_draw(t_matrix matrice) 
 {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -35,7 +35,7 @@ bool matrix_is_identity(t_matrix mat) {
 }
 
 // Fonction pour multiplier deux matrices 4x4
-t_matrix multiply_matrices(t_matrix Ma, t_matrix Mb) 
+t_matrix matrix_multiply(t_matrix Ma, t_matrix Mb) 
 {
     t_matrix resultat;
     int i;
@@ -74,7 +74,7 @@ int is_same_matrice(t_matrix Ma, t_matrix Mb)
 }
 
 // Fonction pour transposez une matrice, cad transformez ses lignes en colonnes et ses colonnes en lignes. (Utile pour l'ombrage)
-t_matrix transpose_matrix(t_matrix mat) 
+t_matrix matrix_transpose(t_matrix mat) 
 {
     t_matrix transposed;
     for (int i = 0; i < 4; i++) {
@@ -86,14 +86,14 @@ t_matrix transpose_matrix(t_matrix mat)
 }
 
 //fonction pour inverser les matrix.
-t_matrix inverse_matrix(t_matrix mat) {
+t_matrix matrix_inverse(t_matrix mat) {
     double det = determinant4x4(mat);
     if (det == 0) {
         fprintf(stderr, "Matrix is not invertible.\n");
         exit(EXIT_FAILURE);
     }
-    t_matrix cofactor = calculate_cofactor_matrice(mat);
-    t_matrix adjugate = transpose_matrix(cofactor);
+    t_matrix cofactor = calculate_cofactor_matrix(mat);
+    t_matrix adjugate = matrix_transpose(cofactor);
     t_matrix inverse;
 
     for (int i = 0; i < 4; ++i) {
@@ -106,7 +106,7 @@ t_matrix inverse_matrix(t_matrix mat) {
 }
 
 //fonction pour multiplier la matrices par un point ou vecteur.
-t_tuple multiply_matrix_by_tuple(t_matrix mat, t_tuple tup) 
+t_tuple matrix_multiply_by_tuple(t_matrix mat, t_tuple tup) 
 {
     t_tuple result;
 

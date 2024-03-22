@@ -23,10 +23,10 @@ t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count)
 
         // Calculez l'inverse de la matrice de transformation de la sphère,
         // peu importe si c'est la matrice identité ou une matrice de transformation complexe.
-        t_matrix inverse_transform = inverse_matrix(sphere->transform);
+        t_matrix inverse_transform = matrix_inverse(sphere->transform);
         
         // Appliquez cette transformation inverse au rayon.
-        transformed_ray = transform_ray(inverse_transform, *ray);
+        transformed_ray = ray_transform(inverse_transform, *ray);
     } else {
         // Pour tous les autres types d'objets ou si aucune transformation n'est appliquée,
         // considerons le rayon original.

@@ -1,7 +1,8 @@
 #include "../include/mathematique.h"
 #include "../include/shape.h"
 
-t_material default_material() 
+// fonction for create material struct with default values
+t_material material_create_default() 
 {
     t_material m;
 

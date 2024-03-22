@@ -6,7 +6,7 @@ double determinant4x4(t_matrix mat)
     double det = 0.0;
     for (int col = 0; col < 4; col++) {
         double subMatrice4x4[3][3];
-        getSubMatrice4x4(mat, subMatrice4x4, 0, col);
+        matrix_submatrix4x4(mat, subMatrice4x4, 0, col);
         double minor = determinant3x3(subMatrice4x4);
         double cofactor = (col % 2 == 0 ? 1 : -1) * minor;
         det += mat.m[0][col] * cofactor;
@@ -29,51 +29,82 @@ double determinant2x2(double Matrice4x4[2][2])
     return (Matrice4x4[0][0] * Matrice4x4[1][1] - Matrice4x4[0][1] * Matrice4x4[1][0]);
 }
 
-// fonction pour calculer le determinant d'un sous matrice (mineur)
+
+// Calcul du mineur d'une matrice 4x4
 double calculate_minor(t_matrix mat, int row, int col)
 {
     double minor[3][3];
     double det;
-    for (int i = 0, mi = 0; i < 4; ++i) {
-        if (i == row) continue;
-        for (int j = 0, mj = 0; j < 4; ++j) {
-            if (j == col) continue;
-            minor[mi][mj] = mat.m[i][j];
-            mj++;
+    int i = 0;
+    int mi = 0;
+
+    while (i < 4)
+    {
+        if (i != row)
+        {
+            int j = 0;
+            int mj = 0;
+            while (j < 4)
+            {
+                if (j != col)
+                {
+                    minor[mi][mj] = mat.m[i][j];
+                    mj++;
+                }
+                j++;
+            }
+            mi++;
         }
-        mi++;
+        i++;
     }
-    det = determinant3x3(minor);
+    det = determinant3x3(minor); // Assurez-vous que cette fonction est correctement définie ailleurs
     return det;
 }
 
-// fonction pour calculer le cofactor d'un matrice
-t_matrix calculate_cofactor_matrice(t_matrix mat) 
+// Calcul de la matrice cofacteur pour une matrice 4x4
+t_matrix calculate_cofactor_matrix(t_matrix mat)
 {
     t_matrix cofactor;
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            double sign = (i + j) % 2 == 0 ? 1.0 : -1.0;
+    int i = 0;
+
+    while (i < 4)
+    {
+        int j = 0;
+        while (j < 4)
+        {
+            double sign = ((i + j) % 2 == 0) ? 1.0 : -1.0;
             cofactor.m[i][j] = sign * calculate_minor(mat, i, j);
+            j++;
         }
+        i++;
     }
     return cofactor;
 }
 
-// fonction pour extraire une sous-matrice 3x3 d'une matrice 4x4 en excluant une ligne et une colonne spécifiques.
-void getSubMatrice4x4(t_matrix mat, double subMatrice4x4[3][3], int excluding_row, int excluding_col) 
+// Extraction d'une sous-matrice 3x3 d'une matrice 4x4 en excluant une ligne et une colonne spécifiques
+void matrix_submatrix4x4(t_matrix mat, double sub_matrix4x4[3][3], int excluding_row, int excluding_col)
 {
+    int i = 0;
     int di = 0;
-    for (int i = 0; i < 4; ++i) {
-        if (i == excluding_row) 
-            continue;
-        int dj = 0;
-        for (int j = 0; j < 4; ++j) {
-            if (j == excluding_col) 
-                continue;
-            subMatrice4x4[di][dj] = mat.m[i][j];
-            dj++;
+
+    while (i < 4)
+    {
+        if (i != excluding_row)
+        {
+            int j = 0;
+            int dj = 0;
+            while (j < 4)
+            {
+                if (j != excluding_col)
+                {
+                    sub_matrix4x4[di][dj] = mat.m[i][j];
+                    dj++;
+                }
+                j++;
+            }
+            di++;
         }
-        di++;
+        i++;
     }
 }
+

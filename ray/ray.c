@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 // Fonction pour initialiser un rayon
-t_ray create_ray(t_tuple origin, t_tuple direction) {
+t_ray ray_create(t_tuple origin, t_tuple direction) {
     t_ray ray;
     ray.origin = origin;
     ray.direction = direction;
@@ -18,15 +18,15 @@ void print_ray(t_ray ray) {
 // Fonction pour calculer le point à la distance t le long du rayon
 t_tuple position(t_ray ray, double t) 
 {
-    t_tuple displacement = multiply_point(ray.direction, t);
+    t_tuple displacement = point_multiply(ray.direction, t);
     return (point_add_vector(ray.origin, displacement));
 }
 
 // fonction pour transformer un rayon suivant une matrix
-t_ray transform_ray(t_matrix mat, t_ray ray) {
+t_ray ray_transform(t_matrix mat, t_ray ray) {
     t_ray transformed_ray;
-    transformed_ray.origin = multiply_matrix_by_tuple(mat, ray.origin);
-    transformed_ray.direction = multiply_matrix_by_tuple(mat, ray.direction);
+    transformed_ray.origin = matrix_multiply_by_tuple(mat, ray.origin);
+    transformed_ray.direction = matrix_multiply_by_tuple(mat, ray.direction);
 
     return transformed_ray;
 }
@@ -44,10 +44,10 @@ uint32_t color_to_rgb(float red, float green, float blue) {
     return ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
 }
 
-void throw_ray(t_mlx *mlx, t_sphere *sphere, t_light light) 
+void ray_throw(t_mlx *mlx, t_sphere *sphere, t_light light) 
 {
     // (void)light;
-    t_tuple camera_position = point(0, 0, -5);
+    t_tuple camera_position = point_create(0, 0, -5);
     double projection_plane_z = 4.0;
     t_ray ray;
     ray.origin = camera_position;
@@ -61,8 +61,8 @@ void throw_ray(t_mlx *mlx, t_sphere *sphere, t_light light)
             double pixel_world_x = ((double)x / mlx->width - 0.5) * (mlx->width / 100);
             double pixel_world_y = ((double)y / mlx->height - 0.5) * (mlx->height / 100);
 
-            t_tuple pixel_target = point(pixel_world_x, -pixel_world_y, projection_plane_z);
-            ray.direction = normalize_vector(subtract_vectors(pixel_target, ray.origin));
+            t_tuple pixel_target = point_create(pixel_world_x, -pixel_world_y, projection_plane_z);
+            ray.direction = vector_normalize(tuple_subtract(pixel_target, ray.origin));
 
             int count;
             t_object obj; // Créez un objet temporaire pour la sphère, pas besoin de pointeur ici si vous passez par valeur
@@ -80,9 +80,9 @@ void throw_ray(t_mlx *mlx, t_sphere *sphere, t_light light)
 
                 t_color color = lighting(hit_sphere->material, light, hit_point, eye, normal);
                 uint32_t rgb_color = color_to_rgb(color.r, color.g, color.b);
-                put_pixel_to_img(mlx, x, y, rgb_color);
+                mlx_put_pixel_to_img(mlx, x, y, rgb_color);
             } else {
-                put_pixel_to_img(mlx, x, y, 0x000000);
+                mlx_put_pixel_to_img(mlx, x, y, 0x000000);
             }
 
             if (intersections != NULL) {
