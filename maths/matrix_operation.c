@@ -1,7 +1,10 @@
 #include "../include/mathematique.h"
 
 // Fonction pour initialiser une matrice 4x4 d'identite avec des 1 lors que i et j sont pareil. 0 sinon 
-t_matrix matrix_init_identity() {
+
+
+t_matrix matrix_init_identity() 
+{
     t_matrix matrice;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -85,12 +88,23 @@ t_matrix matrix_transpose(t_matrix mat)
     return transposed;
 }
 
+
 //fonction pour inverser les matrix.
-t_matrix matrix_inverse(t_matrix mat) {
+t_matrix matrix_inverse(t_matrix mat) 
+{
     double det = determinant4x4(mat);
     if (det == 0) {
-        fprintf(stderr, "Matrix is not invertible.\n");
-        exit(EXIT_FAILURE);
+        fprintf(stderr, "Matrix is not invertible. Determinant = %f\n", det);
+        fprintf(stderr, "Matrix:\n");
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                fprintf(stderr, "%f ", mat.m[i][j]);
+            }
+            fprintf(stderr, "\n");
+        }
+        // Vous pouvez retourner une matrice d'identité comme solution temporaire,
+        // ou gérer cette situation d'une manière qui ne nécessite pas d'arrêter l'exécution.
+        return matrix_init_identity();
     }
     t_matrix cofactor = calculate_cofactor_matrix(mat);
     t_matrix adjugate = matrix_transpose(cofactor);

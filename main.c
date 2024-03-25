@@ -16,24 +16,20 @@ void unit_test()
     error_exit("TEST FONCTION");
 }
 
+
 void    mlx_initialisation(void)
 {
     t_mlx *mlx = mlx_init_and_create_window(860, 600, "minirt");
-    t_sphere sphere;
-    t_light light;
+    t_sphere *sphere;
+    t_light *light;
     if (!mlx) 
         error_exit("erreur initialisation mlx\n");
     mlx_create_image(mlx);
     
-    sphere.center = point_create(0, 0, 0);
-    sphere.diameter = 1.0;
-    sphere.color = (t_color){255, 55, 255};
-    sphere.transform = matrix_init_identity();
-    sphere.material = material_create_default();
-    light.pos = point_create(-15 , 10, -5);
-    light.intensity = (t_color){255, 255, 255};
+    sphere = sphere_create();
+    light = light_create((t_color){1, 1, 1}, point_create(-10 , 10, -10));
 
-    ray_throw(mlx, &sphere, light);
+    ray_throw(mlx, sphere, light);
     mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
     mlx_hook(mlx->win, 17, 0L, mlx_event_close_win, mlx);
     mlx_hook(mlx->win, 2, 1L<<0, mlx_event_handle_key, mlx);
@@ -43,7 +39,7 @@ void    mlx_initialisation(void)
 
 }
 
-#define UNIT_TEST 0
+#define UNIT_TEST 1
 
 int main(int argc, char *argv[]) 
 {

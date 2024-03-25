@@ -14,6 +14,9 @@
 typedef struct s_tuple t_tuple;
 typedef struct s_ray t_ray;
 typedef struct s_matrix t_matrix;
+#define MAX_OBJECTS 10
+
+
 
 typedef enum e_obj_type
 {
@@ -30,6 +33,12 @@ typedef struct s_object
 	struct s_object	*next;
 }					t_object;
 
+typedef struct {
+    t_light* light;
+    t_object** objects; // Tableau de pointeurs vers t_object
+    int object_count;
+} t_world;
+
 typedef struct s_sphere 
 {
     t_tuple center;
@@ -45,11 +54,22 @@ typedef struct s_intersection
     t_object *object;
 }   t_intersection;
 
+typedef struct s_computations {
+    double t;
+    t_object *object;
+    t_tuple point;
+    t_tuple eyev;
+    t_tuple normalv;
+    bool inside;
+} t_computations;
+
+t_color         shade_hit(t_world *world, t_computations *comps);
+t_computations prepare_computations(const t_intersection *intersection, t_ray *ray);
 // =========== SPHERE =============
 
 t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count);
 t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_count);
-t_sphere		sphere_create();
+t_sphere* 		sphere_create();
 t_object*		object_create_for_sphere(const t_sphere* sphere);
 
 // ========== TRANSFORMATION ===========
@@ -59,8 +79,13 @@ void 			set_material(t_sphere *s, t_material m);
 
 // ============ INTERSECT ==============
 
-t_intersection create_intersection(double t, t_object *object);
+t_intersection 	intersection_create(double t, t_object *object);
 t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count);
 t_intersection* hit(t_intersection* intersections, int count);
+
+// ============= world =================
+
+t_world* world_default();
+t_intersection* intersect_world(const t_world* world, const t_ray* ray, int* count);
 
 #endif

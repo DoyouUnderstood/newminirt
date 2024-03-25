@@ -1,7 +1,7 @@
 #include "../include/shape.h"
 
 // Fonction pour créer une intersection
-t_intersection create_intersection(double t, t_object *object) {
+t_intersection intersection_create(double t, t_object *object) {
     t_intersection i;
     i.t = t;
     i.object = object;
@@ -17,7 +17,8 @@ t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count)
     t_ray transformed_ray;
 
     // s'assurez qu'on a affaire a une sphère.
-    if (object->type == SPHERE) {
+    if (object->type == SPHERE) 
+    {
         // Cast `object->obj` en `t_sphere*` pour accéder à sa matrice de transformation.
         t_sphere* sphere = (t_sphere*)object->obj;
 
@@ -28,8 +29,6 @@ t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count)
         // Appliquez cette transformation inverse au rayon.
         transformed_ray = ray_transform(inverse_transform, *ray);
     } else {
-        // Pour tous les autres types d'objets ou si aucune transformation n'est appliquée,
-        // considerons le rayon original.
         transformed_ray = *ray;
     }
 

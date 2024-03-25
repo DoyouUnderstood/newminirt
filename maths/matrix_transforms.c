@@ -1,7 +1,8 @@
 #include "../include/mathematique.h"
 
 // Fonction qui réfléchit un point ou un vecteur par rapport à un axe spécifié.
-t_tuple tuple_reflect(t_tuple point, char axis) {
+t_tuple tuple_reflect(t_tuple point, char axis) 
+{
     switch (axis) {
         case 'x':
             point.x = -point.x;

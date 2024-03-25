@@ -1,17 +1,5 @@
 #include "../include/shape.h"
 
-// fonction qui cree une sphere.
-t_sphere sphere_create() 
-{
-    t_sphere sphere;
-    sphere.center = point(0, 0, 0);
-    sphere.diameter = 1.0;
-    sphere.color = (t_color){.r = 255, .g = 255, .b = 255};
-    sphere.transform = matrix_init_identity();
-
-    return (sphere);
-}
-
 // Calcule les coefficients 'a', 'b', et 'c' pour l'équation quadratique d'intersection.
 void calculate_abc(const t_ray *ray, const t_sphere *sphere, double *a, double *b, double *c) {
     t_tuple sphere_to_ray = tuple_subtract(ray->origin, sphere->center);

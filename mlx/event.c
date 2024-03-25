@@ -5,12 +5,12 @@
 #define KEY_LEFT 123
 #define KEY_UP 126
 #define KEY_DOWN 125
-#define KEY_SHRINK_ROTATE 12 // 'q'
-#define KEY_SHRINK_SHEAR 13  // 'w'
-#define KEY_A 0
-#define KEY_S 1
-#define KEY_D 2
-#define KEY_F 3
+#define KEY_SHRINK_ROTATE 'q'// 'q'
+#define KEY_SHRINK_SHEAR 'w' // 'w'
+#define KEY_A 'a'
+#define KEY_S 's'
+#define KEY_D 'd'
+#define KEY_F 'f'
 #define KEY_K 40
 
 
@@ -43,28 +43,27 @@ void redraw_scene(t_mlx *mlx, t_matrix transformation)
 
     t_light light;
     light.pos = point_create(-10 , 10, -10);
-    light.intensity = (t_color){255, 255, 255};
+    light.intensity = (t_color){1, 1, 1};
 
     if (mlx == NULL || mlx->ptr == NULL) {
         write(1, "Invalid scene or MLX pointer.\n", 30);
         return;
     }
-    if (mlx->img != NULL) {
+    if (mlx->img != NULL) 
+    {
         mlx_destroy_image(mlx->ptr, mlx->img);
     }
     mlx->img = mlx_new_image(mlx->ptr, mlx->width, mlx->height);
-    if (mlx->img == NULL) {
+    if (mlx->img == NULL) 
+    {
         write(1, "Failed to create image.\n", 24);
         return;
     }
     mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian);
-    t_sphere sphere;
-    sphere.center = point_create(0, 0, 0);
-    sphere.diameter = 1.0;
-    sphere.color = (t_color){255, 0, 0};
-    sphere.transform = matrix_init_identity();
-    apply_transformation_to_sphere(&sphere, transformation);
-    ray_throw(mlx, &sphere, light);
+    t_sphere *sphere;
+    sphere = sphere_create();
+    apply_transformation_to_sphere(sphere, transformation);
+    ray_throw(mlx, sphere, &light);
     mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
 }
 

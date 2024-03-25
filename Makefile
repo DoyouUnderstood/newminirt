@@ -17,7 +17,8 @@ INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lm
 
 TEST_SRCS = unit_test/test_intersection_sphere.c unit_test/test_tracking_intersection.c \
 		unit_test/test_hit.c unit_test/test_transorm_ray_and_sphere.c unit_test/test_normat_at.c \
-		unit_test/test_reflect.c unit_test/test_lightning.c
+		unit_test/test_reflect.c unit_test/test_lightning.c unit_test/test_world.c \
+		unit_test/test_computations.c
 
 SRCS = main.c \
       graphics/color.c \
@@ -37,7 +38,9 @@ SRCS = main.c \
 	  graphics/lightning.c \
 	  maths/utils.c \
 	  maths/tuple.c \
-	  memory/memory.c
+	  memory/memory.c \
+	  ray/ray_throw.c \
+	  world/world.c
 
 
 OBJ = $(SRCS:.c=.o)

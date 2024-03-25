@@ -1,16 +1,18 @@
 #include "../include/shape.h"
 
 // fonction qui cree une sphere.
-t_sphere sphere_create() 
+t_sphere* sphere_create() 
 {
-    t_sphere sphere;
-    sphere.center = point_create(0, 0, 0);
-    sphere.diameter = 1.0;
-    sphere.color = (t_color){.r = 255, .g = 255, .b = 255};
-    sphere.transform = matrix_init_identity();
-    t_material material;
-    material_create_default(&material);
-    sphere.material = material;
+    t_sphere* sphere = allocate_and_report(sizeof(t_sphere), "allocation sphere\n");
+    if (sphere == NULL) {
+        error_exit("erreur allocation t_sphere\n");
+        return NULL;
+    }
+    sphere->center = point_create(0, 0, 0);
+    sphere->diameter = 1.0;
+    // sphere->color = (t_color){.r = 1, .g = 0.1, .b = 1};
+    sphere->transform = matrix_init_identity();
+    sphere->material = material_create_default();
 
     return (sphere);
 }
@@ -58,14 +60,14 @@ t_intersection* sphere_intersect(const t_ray *ray, t_object *object, int* out_co
         double t1 = (-b - sqrt_discriminant) / (2 * a);
         double t2 = (-b + sqrt_discriminant) / (2 * a);
 
-        intersections[0] = create_intersection(t1, object);
+        intersections[0] = intersection_create(t1, object);
 
         if (discriminant == 0) 
         {
-            intersections[1] = create_intersection(t1, object);
+            intersections[1] = intersection_create(t1, object);
             *out_count = 2;
         } else if (discriminant > 0) {
-            intersections[1] = create_intersection(t2, object);
+            intersections[1] = intersection_create(t2, object);
             *out_count = 2;
         }
     } else 

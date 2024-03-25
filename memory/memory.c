@@ -69,7 +69,7 @@ void print_memory_usage() {
     printf("Détail des allocations mémoire:\n");
     for (int i = 0; i < allocations_count; i++) {
         if (allocations[i].ptr != NULL) {
-            printf("Alloc: %s, Taille: %zu octets\n", allocations[i].description, allocations[i].size);
+            //printf("Alloc: %s, Taille: %zu octets\n", allocations[i].description, allocations[i].size);
             total_memory += allocations[i].size;
         }
     }
@@ -98,7 +98,9 @@ void* allocate_and_report(size_t size, char* description) {
 
     // Modification ici: Vérifiez si le nombre d'impressions réalisées est inférieur à 10
     // et imprimez seulement si le compteur d'allocations atteint un seuil dynamique ajusté.
-    if (print_counter < total_prints && (allocation_counter >= (print_threshold * (print_counter + 1)))) {
+    if (print_counter < total_prints && (allocation_counter >= (print_threshold * (print_counter + 1)))) 
+    {
+        printf("Description : %s\n", description);
         print_memory_usage();
         print_counter++; // Incrémentez le compteur d'impressions
     }
