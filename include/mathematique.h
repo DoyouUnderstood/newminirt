@@ -36,7 +36,7 @@ t_tuple		tuple_reflect(t_tuple point, char axis);
 
 
 // ============ MATRIX OPERATION ================
-
+t_matrix    matrix(float values[4][4]);
 t_matrix	matrix_init_identity();
 t_matrix 	matrix_multiply(t_matrix Ma, t_matrix Mb);
 t_matrix 	matrix_transpose(t_matrix mat);
@@ -81,7 +81,7 @@ t_tuple		vector_add(t_tuple v1, t_tuple v2);
 t_tuple		vector_scale(t_tuple v, double scalar);
 double		vector_dot(t_tuple a, t_tuple b);
 t_tuple		vector_multiply(t_tuple a, double scalar);
-
+t_tuple     vector_cross(t_tuple a, t_tuple b);
 // ============== NORMAL ===============
 
 t_tuple     normal_at(const t_sphere* sphere, t_tuple world_point);

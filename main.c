@@ -36,10 +36,9 @@ void    mlx_initialisation(void)
     mlx_loop(mlx->ptr);
     mlx_destroy_window(mlx->ptr, mlx->win);
     free(mlx);
-
 }
 
-#define UNIT_TEST 1
+#define UNIT_TEST 0
 
 int main(int argc, char *argv[]) 
 {

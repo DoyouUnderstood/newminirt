@@ -6,7 +6,7 @@ t_material material_create_default()
 {
     t_material m;
 
-    m.color = (t_color){1, 0.1, 1};
+    m.color = (t_color){0.5, 0, 0.2};
     m.ambient = 0.1;
     m.diffuse = 0.9;
     m.specular = 0.9;

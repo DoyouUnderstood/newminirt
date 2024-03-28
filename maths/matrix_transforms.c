@@ -1,5 +1,21 @@
 #include "../include/mathematique.h"
 
+
+// Fonction pour initialiser une matrice avec des valeurs données.
+t_matrix matrix(float values[4][4]) 
+{
+    t_matrix mat;
+    
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            mat.m[i][j] = values[i][j];
+        }
+    }
+    
+    return (mat);
+}
+
+
 // Fonction qui réfléchit un point ou un vecteur par rapport à un axe spécifié.
 t_tuple tuple_reflect(t_tuple point, char axis) 
 {

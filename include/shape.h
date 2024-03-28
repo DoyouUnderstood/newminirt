@@ -17,6 +17,16 @@ typedef struct s_matrix t_matrix;
 #define MAX_OBJECTS 10
 
 
+typedef struct s_camera
+{
+    double hsize;
+    double vsize;
+    double fov;
+    float pixel_size; 
+    float half_width; 
+    float half_height;
+    t_matrix transform;
+}                   t_camera;
 
 typedef enum e_obj_type
 {
@@ -63,8 +73,11 @@ typedef struct s_computations {
     bool inside;
 } t_computations;
 
+t_ray           ray_for_pixel(const t_camera *camera, int px, int py);
+t_camera        camera(int hsize, int vsize, float fov);
+t_matrix        view_transform(t_tuple from, t_tuple to, t_tuple up);
 t_color         shade_hit(t_world *world, t_computations *comps);
-t_computations prepare_computations(const t_intersection *intersection, t_ray *ray);
+t_computations  prepare_computations(const t_intersection *intersection, t_ray *ray);
 // =========== SPHERE =============
 
 t_intersection* intersect(const t_ray *ray, t_object *object, int* out_count);

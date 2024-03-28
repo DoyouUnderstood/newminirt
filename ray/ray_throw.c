@@ -22,7 +22,7 @@ t_color calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light)
         t_tuple eye = vector_negate(ray->direction);
         return lighting(&hit_sphere->material, light, &hit_point, &eye, &normal);
     } else {
-        return (t_color){0, 0, 0};
+        return (t_color){0.1, 0.1, 0.1};
     }
 }
 

@@ -80,3 +80,13 @@ t_tuple vector_negate(t_tuple v)
 
     return result;
 }
+
+t_tuple vector_cross(t_tuple a, t_tuple b) 
+{
+    return (t_tuple){
+        .x = a.y * b.z - a.z * b.y,
+        .y = a.z * b.x - a.x * b.z,
+        .z = a.x * b.y - a.y * b.x,
+        .w = 0.0
+    };
+}
